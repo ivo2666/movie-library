@@ -1,3 +1,19 @@
+# To start this project we need to have:
+    Node.js
+    MongoDB
+
+# First, install the required dependencies
+    npm install
+
+# Start app
+
+## Start Backend and React app concurrently
+    npm run startAll
+
+## Or start separately
+    Backend:
+        npm startBack-end
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
