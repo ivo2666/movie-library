@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Form, Button, FormControl } from 'react-bootstrap';
+import { Jumbotron, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import movieImage from '../images/s.jpg';
 
