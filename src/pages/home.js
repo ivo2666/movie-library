@@ -1,9 +1,12 @@
 import React from 'react';
-import { Nav } from '../components'
+import { Nav, Heading } from '../components'
 
 const Home =  () => {
     return (
+        <>
         <Nav />
+        <Heading />
+        </>
     )
 }
 

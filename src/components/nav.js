@@ -5,6 +5,9 @@ import styled from 'styled-components';
 const StyledNav = styled(Navbar)`
 display: flex;
 flex-wrap: wrap;
+.form-control {
+    width: 310px;
+}
 `
 
 
@@ -17,7 +20,7 @@ const MyNav = () => {
                 <Nav.Link href="#/login">Login</Nav.Link>
             </Nav>
             <Form inline>
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <FormControl type="text" placeholder="search by title for your favorite movie" className="mr-sm-2" />
                 <Button variant="outline-info">Search</Button>
             </Form>
         </StyledNav>

@@ -1,3 +1,4 @@
 import Nav from './nav'
+import Heading from './heading'
 
-export { Nav }
+export { Nav, Heading }
