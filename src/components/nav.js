@@ -16,8 +16,8 @@ const MyNav = () => {
         <StyledNav bg="dark" variant="dark">
             <Navbar.Brand href="/home">My Movie Collection</Navbar.Brand>
             <Nav className="mr-auto">
-                <Nav.Link href="#/register">Register</Nav.Link>
-                <Nav.Link href="#/login">Login</Nav.Link>
+                <Nav.Link href="/register">Register</Nav.Link>
+                <Nav.Link href="/login">Login</Nav.Link>
             </Nav>
             <Form inline>
                 <FormControl type="text" placeholder="search by title for your favorite movie" className="mr-sm-2" />

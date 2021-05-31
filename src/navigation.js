@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { Home } from './pages'
+import { Home, Register } from './pages'
 
 const Navigation = () => {
     return (
@@ -8,6 +8,9 @@ const Navigation = () => {
         <Switch>
         <Route path="/" exact>
                 <Home />
+            </Route>
+        <Route path="/register" >
+                <Register />
             </Route>
         </Switch>
         </BrowserRouter>
