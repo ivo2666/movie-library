@@ -1,10 +1,10 @@
 import { server, headers } from './config'
 
 const user = {
-    register: async (data, onSuccess, onFailure) => {
+    post: async (data, path, onSuccess, onFailure) => {
         try {
         const response = await fetch(
-            `${server}/users/register`,{
+            `${server}/users${path}`,{
                 method: "POST",
                 headers: headers,
                 body: JSON.stringify(data)

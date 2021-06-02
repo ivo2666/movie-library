@@ -50,7 +50,7 @@ const Register = () => {
         if (validationChek) {
             setValidation(<Alert variant='danger'>{validationChek}</Alert>)
         }else {
-            userRequest.register(user,
+            userRequest.post(user, '/register',
                 (user) => {
                     context.logIn(user);
                     history.push('/')

@@ -14,4 +14,4 @@ const headers = {
     'Content-Type': 'application/json',
     'Authorization': getCookie('x-auth-token')
   }
-export { server, headers }
+export { server, headers, getCookie }

@@ -63,12 +63,11 @@ module.exports = {
                 .then(([data, blacklistToken]) => {
                     if (blacklistToken) { return Promise.reject(new Error('blacklisted token')) }
   
-                    models.User.findById(data.id).populate('cars')
+                    models.User.findById(data.id).populate('movies')
                         .then((user) => {
-                            return res.send({
-                                status: true,
+                            return res.send(
                                 user
-                              })
+                              )
                         });
                 })
                 .catch(err => {

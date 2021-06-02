@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { UserContext } from '../contexts';
 import movieImage from '../images/s.jpg';
 
 const StyledSection = styled.section`
@@ -22,10 +23,21 @@ const StyledSection = styled.section`
 }
 `
 const Heading = () => {
+    const context = useContext(UserContext);
+
+    const title = () => {
+        if (context.user) {
+            return <h1>{`Welcome dear ${context.user.username}`}</h1>
+        }else {
+            return <h1>Мake your collection!</h1>
+        }
+    };
+
+
     return (
         <StyledSection>
             <Jumbotron>
-                <h1>Мake your collection!</h1>
+                {title()}
                 <p>
                     Search
                     for movies, add or remove

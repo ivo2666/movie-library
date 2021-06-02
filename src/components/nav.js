@@ -1,6 +1,9 @@
-import React from 'react';
-import { Navbar, Nav, Button, Form, FormControl } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { UserContext } from '../contexts';
+import { SearchBar } from '../components';
 
 const StyledNav = styled(Navbar)`
 display: flex;
@@ -12,17 +15,29 @@ flex-wrap: wrap;
 
 
 const MyNav = () => {
+    const context = useContext(UserContext);
+
+    const links = () => {
+        if (context.user) {
+                return (
+                    <Link to="#" className="nav-link" onClick={context.logOut}>Logout</Link>
+                )
+        }else {
+            return (
+                <>
+                <Link className="nav-link" to="/register">Register</Link>
+                <Link className="nav-link" to="/login">Login</Link>
+                </>
+            )
+        }
+    }
     return (
         <StyledNav bg="dark" variant="dark">
-            <Navbar.Brand href="/home">My Movie Collection</Navbar.Brand>
+            <Link to="/" className="navbar-brand">My Movie Collection</Link>
             <Nav className="mr-auto">
-                <Nav.Link href="/register">Register</Nav.Link>
-                <Nav.Link href="/login">Login</Nav.Link>
+                {links()}
             </Nav>
-            <Form inline>
-                <FormControl type="text" placeholder="search by title for your favorite movie" className="mr-sm-2" />
-                <Button variant="outline-info">Search</Button>
-            </Form>
+            <SearchBar />
         </StyledNav>
     )
 }
