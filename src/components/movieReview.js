@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { Image, Col, Button } from 'react-bootstrap';
 import  { Link }  from 'react-router-dom';
 import movieImage from '../images/s.jpg';
+import { UserContext } from '../contexts';
+import { movie as postMovie } from '../requests';
 
 const Container = styled.div`
 
@@ -54,23 +56,39 @@ img {
 `
 
 const MovieReview = ({movie}) => {
+    const context = useContext(UserContext);
+    const [isFavorite, setIsFavorite] = useState(
+        context.user && context.user.favorites && context.user.favorites.includes(movie.id)
+        );
+    
+    const clickHandler = () => {
+        if (!isFavorite) {
+            postMovie.addToFav(movie.id, context.user.id, setIsFavorite);    
+        }else {
+            postMovie.removeFromFav(movie.id, context.user.id, setIsFavorite)
+        }
+    }
+
+
     return (
         <Container>
                 <Col md={5} xs={12}>
                     <Link className="details-link" to={`/details/${movie.id}`}>
-            <Image alt='car' src={movie.image ? movie.image.original : movieImage} />
+            <Image alt='movie' src={movie.image ? movie.image.original : movieImage} />
             </Link>
             </Col>
             <Col md={5} xs={12}>
             <Link to={`/details/${movie.id}`} className="details-link">
             <h1>
-                {`${movie.name} (${movie.premiered.split('-')[0]})`}
+                {`${movie.name} (${movie.premiered ? movie.premiered.split('-')[0] : '---'})`}
                 </h1>
                 <div className='genres'>{`${movie.genres ? movie.genres.join(', ') : ''} | ${movie.runtime + ' minutes' || ''}`}</div>
                 <div className='summary'dangerouslySetInnerHTML={{ __html: movie.summary || '' }}></div>
                 </Link>
                 <div className='official-site'><a href={movie.officialSite}>Visit to official site</a></div>
-                <Button variant="outline-info">Add to favorites</Button>
+                <Button onClick={clickHandler} variant={isFavorite ? "outline-danger" : "outline-success"}>
+                    {isFavorite ? "Remove from favorites" : "Add to favorites"}
+                    </Button>
             </Col>
         </Container>
     )

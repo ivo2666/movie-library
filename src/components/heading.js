@@ -3,6 +3,7 @@ import { Jumbotron, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { UserContext } from '../contexts';
 import movieImage from '../images/s.jpg';
+import { Link } from 'react-router-dom';
 
 const StyledSection = styled.section`
     background-image: url(${`${movieImage}`});
@@ -46,7 +47,9 @@ const Heading = () => {
                     Make things easy!
   </p>
                 <p>
+                    <Link to="/search">
                 <Button variant="info">Search for your Favorite movie</Button>
+                </Link>
                 </p>
             </Jumbotron>
         </StyledSection>

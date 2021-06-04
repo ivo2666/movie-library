@@ -4,7 +4,8 @@ const saltRounds = 10;
 
 const Schema = mongoose.Schema;
 const Model = mongoose.model;
-const { String, ObjectId } = Schema.Types;
+const { String, Number } = Schema.Types;
+
 
 const userSchema = new Schema({
 
@@ -19,7 +20,9 @@ const userSchema = new Schema({
         require: true
     },
 
-    favorites: [{ type: ObjectId, ref: "movies" }],
+    favorites: {
+        type: [Number]
+    }
 
 
 });

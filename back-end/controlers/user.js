@@ -12,11 +12,12 @@ module.exports = {
 
     post: {
         register: (req, res, next) => {
-            const { username, password } = req.body;
-            models.User.create({ username, password })
-                .then((createdUser) => {
-                  const token = utils.jwt.createToken({ id: createdUser._id });
-                  res.header("Authorization", token).send(createdUser);
+            const { username, password, favorites } = req.body;
+            models.User.create({ username, password, favorites })
+                .then((user) => {
+                  const token = utils.jwt.createToken({ id: user._id });
+                  const {username, _id, favorites} = user;
+                    res.header("Authorization", token).send({username, _id, favorites});
                 })
                 .catch((err) => {
                     if (err.code === 11000) {
@@ -38,8 +39,8 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id }, '010203', { expiresIn: '999999h'});
-                    const {username, _id} = user;
-                    res.header("Authorization", token).send({username, _id});
+                    const {username, _id, favorites} = user;
+                    res.header("Authorization", token).send({username, _id, favorites});
                 })
                 .catch(err => {
                     if (err.message === "Cannot read property 'matchPassword' of null") {
@@ -63,10 +64,11 @@ module.exports = {
                 .then(([data, blacklistToken]) => {
                     if (blacklistToken) { return Promise.reject(new Error('blacklisted token')) }
   
-                    models.User.findById(data.id).populate('movies')
+                    models.User.findById(data.id)
                         .then((user) => {
+                            const {username, _id, favorites} = user;
                             return res.send(
-                                user
+                                {username, _id, favorites}
                               )
                         });
                 })

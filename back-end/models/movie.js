@@ -15,7 +15,9 @@ const movieSchema = new Schema({
 
     users: [{ type: ObjectId, ref: "users" }],
 
-    notes: [{type:String}]
+    notes: [{type:String}],
+
+    originalRating: Schema.Types.Mixed
 
 });
 

@@ -15,7 +15,7 @@ const UserAuth = ({children}) => {
                         console.log(e)
                 })    
             }
-        }, [context])
+    }, [context])
 
     return (
         <>

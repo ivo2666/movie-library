@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import { Home, Register, Login, Search } from './pages'
+import { Home, Register, Login, Search, Details } from './pages'
 
 const Navigation = () => {
     return (
@@ -17,6 +17,9 @@ const Navigation = () => {
             </Route>
         <Route path="/search" >
                 <Search />
+            </Route>
+        <Route path="/details/:id" >
+                <Details />
             </Route>
         </Switch>
         </BrowserRouter>

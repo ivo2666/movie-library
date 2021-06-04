@@ -3,6 +3,7 @@ import { server, headers } from './config'
 const user = {
     post: async (data, path, onSuccess, onFailure) => {
         try {
+          data.favorites = [];
         const response = await fetch(
             `${server}/users${path}`,{
                 method: "POST",

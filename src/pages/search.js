@@ -5,15 +5,12 @@ import { useLocation } from 'react-router-dom';
 import { movie as getMovies } from '../requests';
 
 const StyledDiv = styled.div`
-h1  {
-    text-align: center;
-    margin: 10px;
+display: flex;
+flex-direction: column;
+align-items: center;
+h1 {
+    margin: 20px;
 }
-
-.form-inline {
-    margin: 35px;
-}
-
 `
 
 const Search = () => {
