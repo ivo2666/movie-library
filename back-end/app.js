@@ -9,6 +9,8 @@ const dbConnection = require('./config/database.js');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
+const ratingRouter = require('./routes/rating');
+const comentarRouter = require('./routes/comentar');
 
 const app = express();
 
@@ -25,6 +27,8 @@ dbConnection().then(() => {
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   app.use('/movies', moviesRouter);
+  app.use('/rating', ratingRouter);
+  app.use('/comentars', comentarRouter);
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
