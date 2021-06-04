@@ -37,11 +37,11 @@ module.exports = {
             const { id, user } = req.body;
 
             models.User.findOneAndUpdate({ _id: user },
-                { $push: { favorites: id } },
+                { $addToSet: { favorites: id } },
                 function (error, success) {
                     if (error) {
                         console.log(error);
-                        next(error);
+                        //next(error);
                     } else {
                         console.log(success);
                     }

@@ -42,6 +42,17 @@ const user = {
             onFailure(e)
           }
 
+    },
+    get: async (username, cb) => {
+      const response = await fetch(`${server}/users/${username}`);
+      const body = await response.json();
+      cb(body[0].favorites);
+    },
+
+    getAll: async (cb) => {
+      const response = await fetch(`${server}/users`);
+      const body = await response.json();
+      cb(body);
     }
 }
 

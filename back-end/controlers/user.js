@@ -4,8 +4,14 @@ const utils = require('../utils');
 
 module.exports = {
     get: (req, res, next) => {
-        const user = res.body.username;
-        models.User.find({user})
+        const {username} = req.params;
+        models.User.find({username})
+            .then((users) => res.send(users))
+            .catch(next)
+    },
+
+    getAll: (req, res, next) => {
+        models.User.find()
             .then((users) => res.send(users))
             .catch(next)
     },

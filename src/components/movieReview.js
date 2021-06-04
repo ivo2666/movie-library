@@ -65,7 +65,7 @@ const MovieReview = ({movie}) => {
         if (!isFavorite) {
             postMovie.addToFav(movie.id, context.user.id, setIsFavorite);    
         }else {
-            postMovie.removeFromFav(movie.id, context.user.id, setIsFavorite)
+            postMovie.removeFromFav(movie.id, context.user.id, setIsFavorite);
         }
     }
 
@@ -80,7 +80,7 @@ const MovieReview = ({movie}) => {
             <Col md={5} xs={12}>
             <Link to={`/details/${movie.id}`} className="details-link">
             <h1>
-                {`${movie.name} (${movie.premiered ? movie.premiered.split('-')[0] : '---'})`}
+                {`${movie.name} (${movie.premiered ? movie.premiered.split('-')[0] : '----'})`}
                 </h1>
                 <div className='genres'>{`${movie.genres ? movie.genres.join(', ') : ''} | ${movie.runtime + ' minutes' || ''}`}</div>
                 <div className='summary'dangerouslySetInnerHTML={{ __html: movie.summary || '' }}></div>
