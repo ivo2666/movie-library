@@ -31,9 +31,7 @@ const Favorites = (props) => {
     const renderFav = () => {
         if (favorites && favorites.length > 0) {
             return favorites.map(f => <FavCard key={f} favId={f} />)
-        } else if (favorites === null) {
-            return <LoadingSpinner />
-        }else {
+        } else {
             return (
                 <p>
                     {`${props.username || 'You'} don't have any favorites yet`}
