@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import Navigation from './navigation';
+import ErrorBoundary from './erorrBoundary';
+import { UserContext } from './contexts';
+import UserAuth from './userAuth';
 
-function App() {
+function App(props) {
+  const [user, setUser] = useState(props.user ? {
+    username: props.user,
+    id: props.user,
+    loggedIn: true
+  } : null)
+
+  const logIn = (user) => {
+    setUser({
+      ...user,
+      loggedIn: true,
+    })
+  }
+
+  const logOut = () => {
+    document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    setUser(null)
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ErrorBoundary>
+        <UserContext.Provider value={{
+      user,
+      logIn,
+      logOut
+    }}>
+      <UserAuth>
+      <Navigation />
+      </UserAuth>
+      </UserContext.Provider>
+      </ErrorBoundary>
     </div>
   );
 }

@@ -1,3 +1,4 @@
+const cors = require('cors');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
@@ -7,10 +8,16 @@ const dbConnection = require('./config/database.js');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const moviesRouter = require('./routes/movies');
+const ratingRouter = require('./routes/rating');
+const comentarRouter = require('./routes/comentar');
 
 const app = express();
 
 dbConnection().then(() => {
+  app.use(cors({
+    exposedHeaders: "Authorization"
+  }));
   app.use(logger('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
@@ -19,6 +26,9 @@ dbConnection().then(() => {
 
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
+  app.use('/movies', moviesRouter);
+  app.use('/rating', ratingRouter);
+  app.use('/comentars', comentarRouter);
 
   // catch 404 and forward to error handler
   app.use(function (req, res, next) {
@@ -28,12 +38,13 @@ dbConnection().then(() => {
   // error handler
   app.use(function (err, req, res, next) {
     // set locals, only providing error in development
+    console.log(err.message);
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.send('error');
   });
 })
 
