@@ -3,7 +3,7 @@ const models = require('../models');
 module.exports = {
     get: (req, res, next) => {
         const { id } = req.params;
-        const { username } = req.body;
+        const { username } = req.headers;
         models.Comentar.find({movie: id, username})
             .then((comentars) => res.send(comentars))
             .catch(next)
@@ -12,13 +12,16 @@ module.exports = {
         const id = req.params.id;
         const update = req.body;
         models.Comentar.updateOne({ _id: id },  update )
-            .then((updatedComentar) => res.send(updatedComentar))
-            .catch(next)
+            .then((comentarObj) => {
+                const { comentar } = comentarObj;
+                res.send(comentar)
+            }).catch(next)
     },
     post: (req, res, next) => {
         const { comentar, movieId, username } = req.body;
         models.Comentar.create({ comentar, movie: movieId, username })
-            .then((comentar) => {
+            .then((comentarObj) => {
+                const { comentar } = comentarObj;
                 res.send(comentar)
             })
             .catch((err) => {

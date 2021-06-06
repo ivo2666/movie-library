@@ -16,7 +16,7 @@ const Others = () => {
 
     const userRend = (u, index) => {
         return (
-            <a key={u.id} onClick={clickHandler} href="#user-fav"><h3 key={u.id} id={index}>{u.username}</h3></a>
+            <a key={u._id} onClick={clickHandler} href="#user-fav"><h3 id={index}>{u.username}</h3></a>
         )
     }
 

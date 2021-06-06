@@ -8,7 +8,7 @@ const comentar = {
                 headers,
                 body: JSON.stringify({ comentar: update })
             });
-            const body = response.json()
+            const body = await response.json()
 
             cb({...com, body})
             
@@ -20,10 +20,10 @@ const comentar = {
 
     get: async (id, username, cb) => {
         try {
+            headers.username = username;
             const response = await fetch(`${server}/comentars/${id}`, {
-                method: "POST",
-                headers,
-                body: JSON.stringify({username})
+                method: "GET",
+                headers
             });
             const body = await response.json();
             cb(body);
@@ -40,9 +40,8 @@ const comentar = {
                 headers,
                 body: JSON.stringify({comentar, movieId, username, com, cb})
             });
-            const body = response.json()
-
-            cb({...com, body})
+            const body = await response.json()
+            cb({...com, ...body })
             
         } catch (err) {
             console.log(err)
@@ -56,7 +55,7 @@ const comentar = {
                 method: "DELETE",
                 headers
             });
-            const body = response.json()
+            const body = await response.json()
             return body
         } catch (err) {
             console.log(err)
