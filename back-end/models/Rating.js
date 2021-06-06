@@ -10,6 +10,7 @@ const ratingSchema = new Schema({
 
     rating: {
         type: Number,
+        uniq: true
     },
 
     username: {

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../contexts';
-import { FavCard, LoadingSpinner } from '../components';
+import { FavCard } from '../components';
 import { user as userReq } from '../requests';
 
 const StyledSection = styled.section`

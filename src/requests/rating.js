@@ -20,13 +20,13 @@ const rating = {
 
     get: async (id, username, cb) => {
         try {
+            headers.username = username 
             const response = await fetch(`${server}/rating/${id}`, {
-                method: "POST",
-                headers,
-                body: JSON.stringify({username})
+                method: "GET",
+                headers
             });
             const body = await response.json();
-            cb(body);
+            cb(body[0].rating);
         } catch (err) {
             console.log(err)
             throw new Error('Something wrong!')
@@ -40,7 +40,7 @@ const rating = {
                 headers,
                 body: JSON.stringify({rating, movieId, username, cb})
             });
-            const body = response.json()
+            const body = await response.json()
 
             cb(body.rating)
             
@@ -56,7 +56,7 @@ const rating = {
                 method: "DELETE",
                 headers
             });
-            const body = response.json()
+            const body = await response.json()
             return body
         } catch (err) {
             console.log(err)
